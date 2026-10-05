@@ -2,10 +2,16 @@
 <html lang="th">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<title>Cat Game</title>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
+
+<title>Cat Room</title>
+
 
 <style>
 
@@ -26,19 +32,23 @@ body{
 }
 
 body{
+
   background:#171717;
+
   color:#fff;
+
   font-family:
     Arial,
     "Noto Sans Thai",
     sans-serif;
 
   overflow:hidden;
+
 }
 
 
 /* =====================================================
-   GAME SCREEN — 9:16
+   GAME — 9:16
 ===================================================== */
 
 .game{
@@ -46,20 +56,14 @@ body{
   position:relative;
 
   width:min(100vw, 56.25vh);
+
   height:min(100vh, 177.7778vw);
 
-  margin:auto;
+  margin:0 auto;
 
   overflow:hidden;
 
-  background:
-    linear-gradient(
-      to bottom,
-      #8b8b8b 0%,
-      #777777 68%,
-      #686868 68%,
-      #5e5e5e 100%
-    );
+  background:#777;
 
 }
 
@@ -77,8 +81,8 @@ body{
   background:
     linear-gradient(
       to bottom,
-      #969696,
-      #858585
+      #999999 0%,
+      #858585 100%
     );
 
 }
@@ -101,11 +105,14 @@ body{
   background:
     linear-gradient(
       to bottom,
-      #696969,
+      #6d6d6d,
       #555555
     );
 
 }
+
+
+/* subtle floor lines */
 
 .floor::before{
 
@@ -115,69 +122,75 @@ body{
 
   inset:0;
 
-  opacity:.12;
+  opacity:.10;
 
   background:
     repeating-linear-gradient(
       0deg,
-      transparent 0px,
-      transparent 38px,
-      #ffffff 39px,
-      transparent 40px
+      transparent 0,
+      transparent 40px,
+      #fff 41px,
+      transparent 42px
     );
 
 }
 
 
 /* =====================================================
-   ROOM LIGHT
+   LIGHT
 ===================================================== */
 
 .light{
 
   position:absolute;
 
-  width:90%;
-  height:45%;
+  width:100%;
+  height:55%;
 
-  top:-15%;
-  left:5%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(255,255,255,.16),
-      transparent 70%
-    );
+  top:-18%;
+  left:0;
 
   pointer-events:none;
 
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255,255,255,.18),
+      transparent 68%
+    );
+
 }
 
 
 /* =====================================================
-   PRODUCT BASE
+   OBJECTS
 ===================================================== */
 
 .object{
+
   position:absolute;
+
   user-select:none;
+
 }
 
 
 /* =====================================================
-   1. CAT BED
+   CAT BED
 ===================================================== */
 
 .cat-bed{
 
-  left:7%;
-  bottom:10%;
+  left:6%;
 
-  width:45%;
+  bottom:9%;
+
+  width:43%;
+
   height:20%;
 
 }
+
 
 .bed-outer{
 
@@ -198,19 +211,19 @@ body{
   background:
     linear-gradient(
       145deg,
-      #bcbcbc,
-      #888888
+      #c0c0c0,
+      #858585
     );
 
   border:
-    2px solid
-    #666;
+    2px solid #666;
 
   box-shadow:
     0 10px 18px
     rgba(0,0,0,.28);
 
 }
+
 
 .bed-inner{
 
@@ -226,16 +239,16 @@ body{
 
   background:
     radial-gradient(
-      ellipse at center,
-      #9c9c9c,
-      #737373
+      ellipse,
+      #9d9d9d,
+      #6f6f6f
     );
 
   border:
-    2px solid
-    #666;
+    2px solid #666;
 
 }
+
 
 .bed-pillow{
 
@@ -251,11 +264,8 @@ body{
 
   background:#aaa;
 
-  box-shadow:
-    inset 0 4px 8px
-    rgba(255,255,255,.15);
-
 }
+
 
 .bed-label{
 
@@ -270,7 +280,7 @@ body{
 
   color:#ddd;
 
-  font-size:11px;
+  font-size:10px;
 
   letter-spacing:1px;
 
@@ -278,18 +288,21 @@ body{
 
 
 /* =====================================================
-   2. FOOD + WATER BOWLS
+   FOOD + WATER
 ===================================================== */
 
 .bowls{
 
-  right:7%;
-  bottom:10%;
+  right:6%;
+
+  bottom:9%;
 
   width:40%;
+
   height:17%;
 
 }
+
 
 .bowl{
 
@@ -298,6 +311,7 @@ body{
   bottom:0;
 
   width:42%;
+
   height:54%;
 
   border-radius:
@@ -309,13 +323,12 @@ body{
   background:
     linear-gradient(
       to bottom,
-      #bdbdbd,
-      #777777
+      #c0c0c0,
+      #777
     );
 
   border:
-    2px solid
-    #5a5a5a;
+    2px solid #5a5a5a;
 
   box-shadow:
     0 8px 10px
@@ -323,13 +336,16 @@ body{
 
 }
 
+
 .bowl.food{
   left:4%;
 }
 
+
 .bowl.water{
   right:4%;
 }
+
 
 .bowl::before{
 
@@ -339,6 +355,7 @@ body{
 
   left:10%;
   right:10%;
+
   top:10%;
 
   height:42%;
@@ -347,11 +364,8 @@ body{
 
   background:#424242;
 
-  border:
-    1px solid
-    #303030;
-
 }
+
 
 .bowl.food::after{
 
@@ -361,20 +375,17 @@ body{
 
   left:18%;
   right:18%;
+
   top:18%;
 
   height:25%;
 
   border-radius:50%;
 
-  background:
-    radial-gradient(
-      circle,
-      #4c4c4c 0 25%,
-      transparent 27%
-    );
+  background:#555;
 
 }
+
 
 .bowl.water::after{
 
@@ -384,6 +395,7 @@ body{
 
   left:17%;
   right:17%;
+
   top:20%;
 
   height:18%;
@@ -392,11 +404,8 @@ body{
 
   background:#8d9aa0;
 
-  box-shadow:
-    inset 0 2px 3px
-    rgba(255,255,255,.25);
-
 }
+
 
 .bowl-label{
 
@@ -412,9 +421,8 @@ body{
 
   font-size:9px;
 
-  letter-spacing:.5px;
-
 }
+
 
 .food-label{
   left:4%;
@@ -426,15 +434,17 @@ body{
 
 
 /* =====================================================
-   3. STANDING CAT TOY
+   CAT TOY
 ===================================================== */
 
 .cat-toy{
 
   left:50%;
-  top:42%;
 
-  width:32%;
+  top:40%;
+
+  width:31%;
+
   height:32%;
 
   transform:
@@ -442,14 +452,17 @@ body{
 
 }
 
+
 .toy-base{
 
   position:absolute;
 
   left:16%;
+
   bottom:0;
 
   width:68%;
+
   height:13%;
 
   border-radius:50%;
@@ -457,35 +470,33 @@ body{
   background:
     linear-gradient(
       to bottom,
-      #c4c4c4,
+      #c5c5c5,
       #777
     );
 
   border:
-    2px solid
-    #555;
-
-  box-shadow:
-    0 8px 12px
-    rgba(0,0,0,.25);
+    2px solid #555;
 
 }
+
 
 .toy-pole{
 
   position:absolute;
 
   left:48%;
+
   bottom:10%;
 
   width:4%;
+
   height:68%;
 
   background:
     linear-gradient(
       to right,
       #444,
-      #999,
+      #aaa,
       #444
     );
 
@@ -493,14 +504,17 @@ body{
 
 }
 
+
 .toy-arm{
 
   position:absolute;
 
   left:49%;
+
   top:18%;
 
   width:45%;
+
   height:4%;
 
   background:#555;
@@ -514,14 +528,17 @@ body{
 
 }
 
+
 .toy-ball{
 
   position:absolute;
 
   right:0;
+
   top:0;
 
   width:28px;
+
   height:28px;
 
   border-radius:50%;
@@ -534,20 +551,19 @@ body{
       #55d6c2
     );
 
-  box-shadow:
-    0 0 8px
-    rgba(255,255,255,.3);
-
 }
+
 
 .toy-feather{
 
   position:absolute;
 
   left:48%;
+
   top:6%;
 
   width:16px;
+
   height:28px;
 
   border-radius:
@@ -568,12 +584,14 @@ body{
 
 }
 
+
 .toy-label{
 
   position:absolute;
 
   left:0;
   right:0;
+
   bottom:-15%;
 
   text-align:center;
@@ -581,8 +599,6 @@ body{
   color:#ddd;
 
   font-size:10px;
-
-  letter-spacing:.5px;
 
 }
 
@@ -596,14 +612,15 @@ body{
   position:absolute;
 
   left:50%;
+
   bottom:24%;
 
-  width:42%;
+  width:44%;
 
   transform:
     translateX(-50%);
 
-  z-index:10;
+  z-index:20;
 
   pointer-events:none;
 
@@ -616,8 +633,16 @@ body{
 
 
 /*
-   รูป PNG ของแมว
-   ภาพ A4 จะถูกย่อให้พอดีกับพื้นที่นี้
+   รูปแมวของเธอเป็นไฟล์ชื่อ:
+   Sit
+   Bored
+   Run_left
+   Run_right
+   Sleep
+   Wet
+   Yawn
+
+   ไม่มี .png ต่อท้าย
 */
 
 .cat img{
@@ -625,9 +650,10 @@ body{
   display:block;
 
   width:100%;
+
   height:auto;
 
-  max-height:30vh;
+  max-height:32vh;
 
   object-fit:contain;
 
@@ -651,9 +677,11 @@ body{
   position:absolute;
 
   left:50%;
-  bottom:-2px;
+
+  bottom:0;
 
   width:48%;
+
   height:10px;
 
   transform:
@@ -662,7 +690,7 @@ body{
   border-radius:50%;
 
   background:
-    rgba(0,0,0,.3);
+    rgba(0,0,0,.32);
 
   filter:
     blur(4px);
@@ -673,7 +701,7 @@ body{
 
 
 /* =====================================================
-   DEBUG
+   SMALL INFO
 ===================================================== */
 
 .design-info{
@@ -681,14 +709,17 @@ body{
   position:absolute;
 
   top:14px;
+
   left:14px;
 
-  padding:5px 9px;
+  padding:
+    5px
+    9px;
 
   border-radius:8px;
 
   background:
-    rgba(0,0,0,.28);
+    rgba(0,0,0,.25);
 
   color:#ddd;
 
@@ -696,9 +727,22 @@ body{
 
   letter-spacing:.5px;
 
-  opacity:.7;
+  opacity:.65;
 
-  z-index:30;
+  z-index:50;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width:430px){
+
+  .design-info{
+    display:none;
+  }
 
 }
 
@@ -710,28 +754,29 @@ body{
 @media (prefers-reduced-motion:reduce){
 
   *{
+
     animation:none !important;
+
     transition:none !important;
-  }
 
-}
-
-@media (max-width:430px){
-
-  .design-info{
-    display:none;
   }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
+<!-- =====================================================
+     GAME
+===================================================== -->
+
 <main class="game">
+
 
   <div class="wall"></div>
 
@@ -810,14 +855,13 @@ body{
   <div
     id="cat"
     class="cat"
-    aria-label="Black cat"
   >
 
     <div class="cat-shadow"></div>
 
     <img
       id="catImage"
-      src="Sit.png"
+      src="Sit"
       alt="Black cat"
       draggable="false"
     >
@@ -836,7 +880,37 @@ body{
 <script>
 
 /* =====================================================
-   CAT SYSTEM
+   CAT FILES
+===================================================== */
+
+const CAT_IMAGES = {
+
+  Sit:
+    "Sit",
+
+  Bored:
+    "Bored",
+
+  Run_left:
+    "Run_left",
+
+  Run_right:
+    "Run_right",
+
+  Sleep:
+    "Sleep",
+
+  Wet:
+    "Wet",
+
+  Yawn:
+    "Yawn"
+
+};
+
+
+/* =====================================================
+   ELEMENTS
 ===================================================== */
 
 const cat =
@@ -846,74 +920,30 @@ const catImage =
   document.getElementById("catImage");
 
 
-/*
-   ไฟล์แมว
-*/
-
-const CAT_IMAGES = {
-
-  Sit:
-    "Sit.png",
-
-  Bored:
-    "Bored.png",
-
-  Run_left:
-    "Run_left.png",
-
-  Run_right:
-    "Run_right.png",
-
-  Sleep:
-    "Sleep.png",
-
-  Wet:
-    "Wet.png",
-
-  Yawn:
-    "Yawn.png"
-
-};
-
-
 /* =====================================================
-   STATE
+   CAT STATE
 ===================================================== */
+
+let catPosition = 50;
 
 let catBusy = false;
 
 
-/*
-   ตำแหน่งของแมว
-   เป็นเปอร์เซ็นต์ของความกว้างเกม
-*/
-
-let catPosition = 50;
-
-
 /* =====================================================
-   CHANGE CAT
+   SET CAT IMAGE
 ===================================================== */
 
 function setCat(type){
 
-  if(!CAT_IMAGES[type]){
+  const file =
+    CAT_IMAGES[type];
+
+  if(!file){
     return;
   }
 
   catImage.src =
-    CAT_IMAGES[type];
-
-}
-
-
-/* =====================================================
-   RETURN TO SIT
-===================================================== */
-
-function sit(){
-
-  setCat("Sit");
+    file;
 
 }
 
@@ -933,8 +963,19 @@ function wait(ms){
 
 
 /* =====================================================
+   SIT
+===================================================== */
+
+function sit(){
+
+  setCat("Sit");
+
+}
+
+
+/* =====================================================
    YAWN
-   ทุก 1 นาทีของเวลาจริง
+   ทุก 1 นาที
 ===================================================== */
 
 async function doYawn(){
@@ -947,10 +988,6 @@ async function doYawn(){
 
   setCat("Yawn");
 
-  /*
-     แสดงท่าหาวประมาณ 3 วินาที
-  */
-
   await wait(3000);
 
   sit();
@@ -962,7 +999,7 @@ async function doYawn(){
 
 /* =====================================================
    BORED
-   ทุก 5 นาทีของเวลาจริง
+   ทุก 5 นาที
 ===================================================== */
 
 async function doBored(){
@@ -974,10 +1011,6 @@ async function doBored(){
   catBusy = true;
 
   setCat("Bored");
-
-  /*
-     แสดงท่าเบื่อประมาณ 4 วินาที
-  */
 
   await wait(4000);
 
@@ -1002,18 +1035,19 @@ async function walk(direction){
 
 
   /*
-     กำหนดระยะทาง
+     ระยะทางในการเดิน
   */
 
   const distance =
-    20 + Math.random() * 25;
+    18 +
+    Math.random() * 22;
 
+
+  /* -----------------------------------------------
+     เดินซ้าย
+  ------------------------------------------------ */
 
   if(direction === "left"){
-
-    /*
-       ไม่ให้เดินชนขอบซ้าย
-    */
 
     catPosition =
       Math.max(
@@ -1024,11 +1058,13 @@ async function walk(direction){
     setCat("Run_left");
 
   }
-  else{
 
-    /*
-       ไม่ให้เดินชนขอบขวา
-    */
+
+  /* -----------------------------------------------
+     เดินขวา
+  ------------------------------------------------ */
+
+  else{
 
     catPosition =
       Math.min(
@@ -1042,7 +1078,7 @@ async function walk(direction){
 
 
   /*
-     ให้แมวเคลื่อนที่จริง
+     ขยับตัวแมว
   */
 
   cat.style.left =
@@ -1078,25 +1114,27 @@ async function randomWalk(){
   }
 
 
-  /*
-     ถ้าอยู่ซ้ายมาก ให้เดินขวา
-     ถ้าอยู่ขวามาก ให้เดินซ้าย
-     ไม่อย่างนั้นสุ่ม
-  */
-
   let direction;
 
 
+  /*
+     ป้องกันแมวเดินออกขอบ
+  */
+
   if(catPosition <= 25){
 
-    direction = "right";
+    direction =
+      "right";
 
   }
+
   else if(catPosition >= 75){
 
-    direction = "left";
+    direction =
+      "left";
 
   }
+
   else{
 
     direction =
@@ -1113,20 +1151,14 @@ async function randomWalk(){
 
 
 /* =====================================================
-   AUTOMATIC WALK TIMER
+   AUTOMATIC WALK
 ===================================================== */
-
-
-/*
-   แมวจะเริ่มเดินหลังจากเกมเปิดประมาณ 8 วินาที
-   จากนั้นเดินเป็นระยะ ๆ
-*/
 
 function scheduleWalk(){
 
   const delay =
-    8000 +
-    Math.random() * 7000;
+    7000 +
+    Math.random() * 8000;
 
 
   setTimeout(
@@ -1147,9 +1179,8 @@ function scheduleWalk(){
    REAL TIME YAWN
 ===================================================== */
 
-
 /*
-   1 นาทีจริง
+   ทุก 60 วินาที
 */
 
 setInterval(
@@ -1162,14 +1193,30 @@ setInterval(
    REAL TIME BORED
 ===================================================== */
 
-
 /*
-   5 นาทีจริง
+   ทุก 5 นาที
 */
 
 setInterval(
   doBored,
   5 * 60 * 1000
+);
+
+
+/* =====================================================
+   PRELOAD
+===================================================== */
+
+Object.values(CAT_IMAGES).forEach(
+  file => {
+
+    const image =
+      new Image();
+
+    image.src =
+      file;
+
+  }
 );
 
 
@@ -1186,23 +1233,9 @@ cat.style.left =
 scheduleWalk();
 
 
-/* =====================================================
-   PRELOAD CAT IMAGES
-===================================================== */
-
-Object.values(CAT_IMAGES).forEach(
-  src => {
-
-    const image =
-      new Image();
-
-    image.src = src;
-
-  }
-);
-
 </script>
 
 
 </body>
+
 </html>
