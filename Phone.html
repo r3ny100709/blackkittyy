@@ -1,1 +1,1322 @@
+<!DOCTYPE html>
+<html lang="th">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Phone & Money System</title>
+
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+
+html,
+body{
+
+    margin:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#777;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+}
+
+
+button{
+
+    font:inherit;
+
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.game{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+}
+
+
+/* =====================================================
+   PHONE BUTTON
+===================================================== */
+
+.phone-button{
+
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    width:58px;
+    height:58px;
+
+    border:0;
+
+    border-radius:18px;
+
+    background:#111;
+
+    color:white;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.3);
+
+}
+
+
+/* =====================================================
+   PHONE
+===================================================== */
+
+.phone{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:min(360px, 92vw);
+
+    height:min(700px, 88vh);
+
+    transform:
+        translate(-50%, -50%);
+
+    background:#111;
+
+    border:
+        5px solid #222;
+
+    border-radius:38px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.5);
+
+    display:none;
+
+}
+
+
+/* =====================================================
+   PHONE STATUS BAR
+===================================================== */
+
+.phone-status{
+
+    height:48px;
+
+    padding:
+        0 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    background:#080808;
+
+    color:white;
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   PHONE SCREEN
+===================================================== */
+
+.phone-screen{
+
+    height:
+        calc(100% - 48px);
+
+    padding:20px;
+
+    overflow:auto;
+
+    background:
+        linear-gradient(
+            180deg,
+            #242424,
+            #101010
+        );
+
+    color:white;
+
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+.phone-home{
+
+    display:block;
+
+}
+
+
+.phone-title{
+
+    margin:
+        12px 0 25px;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+}
+
+
+.apps{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:18px;
+
+}
+
+
+.app{
+
+    min-height:115px;
+
+    border:0;
+
+    border-radius:24px;
+
+    background:#202020;
+
+    color:white;
+
+    cursor:pointer;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+}
+
+
+.app-icon{
+
+    font-size:42px;
+
+}
+
+
+.app-name{
+
+    font-size:15px;
+
+}
+
+
+/* =====================================================
+   APP PAGE
+===================================================== */
+
+.app-page{
+
+    display:none;
+
+}
+
+
+.app-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:22px;
+
+}
+
+
+.back-button{
+
+    width:42px;
+    height:42px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#292929;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+
+.app-header h2{
+
+    margin:0;
+
+    font-size:22px;
+
+}
+
+
+/* =====================================================
+   BANK
+===================================================== */
+
+.bank-card{
+
+    padding:22px;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #202020,
+            #090909
+        );
+
+    border:
+        1px solid #444;
+
+    margin-bottom:18px;
+
+}
+
+
+.bank-label{
+
+    color:#aaa;
+
+    font-size:13px;
+
+}
+
+
+.bank-balance{
+
+    margin-top:8px;
+
+    font-size:32px;
+
+    font-weight:bold;
+
+}
+
+
+.account-number{
+
+    margin-top:15px;
+
+    color:#bbb;
+
+    font-size:14px;
+
+}
+
+
+.payment-box{
+
+    padding:18px;
+
+    border-radius:20px;
+
+    background:#1d1d1d;
+
+    margin-top:15px;
+
+}
+
+
+.payment-title{
+
+    font-size:14px;
+
+    color:#aaa;
+
+}
+
+
+.payment-name{
+
+    margin-top:7px;
+
+    font-size:18px;
+
+}
+
+
+.payment-price{
+
+    margin-top:5px;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+}
+
+
+.pay-button{
+
+    width:100%;
+
+    min-height:52px;
+
+    margin-top:16px;
+
+    border:0;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    color:#111;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+.pay-button:disabled{
+
+    opacity:.4;
+
+    cursor:not-allowed;
+
+}
+
+
+/* =====================================================
+   SHOP
+===================================================== */
+
+.shop-item{
+
+    padding:18px;
+
+    margin-bottom:14px;
+
+    border-radius:20px;
+
+    background:#1d1d1d;
+
+    border:
+        1px solid #383838;
+
+}
+
+
+.shop-item-name{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+
+.shop-item-price{
+
+    margin-top:5px;
+
+    color:#bbb;
+
+}
+
+
+.buy-button{
+
+    width:100%;
+
+    min-height:46px;
+
+    margin-top:14px;
+
+    border:0;
+
+    border-radius:14px;
+
+    background:#fff;
+
+    color:#111;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+.success{
+
+    display:none;
+
+    text-align:center;
+
+    padding-top:70px;
+
+}
+
+
+.success-icon{
+
+    font-size:65px;
+
+}
+
+
+.success h2{
+
+    margin-top:18px;
+
+}
+
+
+.success p{
+
+    color:#aaa;
+
+}
+
+
+.home-button{
+
+    width:100%;
+
+    min-height:50px;
+
+    margin-top:25px;
+
+    border:0;
+
+    border-radius:16px;
+
+    background:white;
+
+    color:#111;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+/* =====================================================
+   CLOSE PHONE
+===================================================== */
+
+.close-phone{
+
+    width:100%;
+
+    margin-top:30px;
+
+    min-height:45px;
+
+    border:0;
+
+    border-radius:15px;
+
+    background:#292929;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="game">
+
+
+    <!-- =================================================
+         ปุ่มโทรศัพท์
+    ================================================== -->
+
+    <button
+        class="phone-button"
+        id="openPhone"
+        type="button"
+    >
+        📱
+    </button>
+
+
+    <!-- =================================================
+         PHONE
+    ================================================== -->
+
+    <section
+        class="phone"
+        id="phone"
+    >
+
+
+        <!-- =============================================
+             STATUS BAR
+        ============================================== -->
+
+        <div class="phone-status">
+
+            <span>
+                12:00
+            </span>
+
+            <span>
+                📶
+                &nbsp;
+                🔋 100%
+            </span>
+
+        </div>
+
+
+        <!-- =============================================
+             PHONE SCREEN
+        ============================================== -->
+
+        <div class="phone-screen">
+
+
+            <!-- =========================================
+                 HOME
+            ========================================== -->
+
+            <div
+                class="phone-home"
+                id="phoneHome"
+            >
+
+                <div class="phone-title">
+                    My Phone
+                </div>
+
+
+                <div class="apps">
+
+
+                    <!-- SHOP -->
+
+                    <button
+                        class="app"
+                        id="openShop"
+                        type="button"
+                    >
+
+                        <span class="app-icon">
+                            🛒
+                        </span>
+
+                        <span class="app-name">
+                            Shop
+                        </span>
+
+                    </button>
+
+
+                    <!-- BANK -->
+
+                    <button
+                        class="app"
+                        id="openBank"
+                        type="button"
+                    >
+
+                        <span class="app-icon">
+                            🏦
+                        </span>
+
+                        <span class="app-name">
+                            Bank
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+                <button
+                    class="close-phone"
+                    id="closePhone"
+                    type="button"
+                >
+                    ปิดโทรศัพท์
+                </button>
+
+            </div>
+
+
+            <!-- =========================================
+                 SHOP
+            ========================================== -->
+
+            <div
+                class="app-page"
+                id="shopPage"
+            >
+
+                <div class="app-header">
+
+                    <button
+                        class="back-button"
+                        id="shopBack"
+                        type="button"
+                    >
+                        ←
+                    </button>
+
+                    <h2>
+                        🛒 ร้านค้า
+                    </h2>
+
+                </div>
+
+
+                <!-- FOOD 1 -->
+
+                <div class="shop-item">
+
+                    <div class="shop-item-name">
+                        อาหารแมวทั่วไป
+                    </div>
+
+                    <div class="shop-item-price">
+                        ฿150
+                    </div>
+
+                    <button
+                        class="buy-button"
+                        type="button"
+                        data-name="อาหารแมวทั่วไป"
+                        data-price="150"
+                    >
+                        สั่งซื้อ
+                    </button>
+
+                </div>
+
+
+                <!-- FOOD 2 -->
+
+                <div class="shop-item">
+
+                    <div class="shop-item-name">
+                        อาหารแมวรสปลา
+                    </div>
+
+                    <div class="shop-item-price">
+                        ฿220
+                    </div>
+
+                    <button
+                        class="buy-button"
+                        type="button"
+                        data-name="อาหารแมวรสปลา"
+                        data-price="220"
+                    >
+                        สั่งซื้อ
+                    </button>
+
+                </div>
+
+
+                <!-- FOOD 3 -->
+
+                <div class="shop-item">
+
+                    <div class="shop-item-name">
+                        อาหารเปียก
+                    </div>
+
+                    <div class="shop-item-price">
+                        ฿75
+                    </div>
+
+                    <button
+                        class="buy-button"
+                        type="button"
+                        data-name="อาหารเปียก"
+                        data-price="75"
+                    >
+                        สั่งซื้อ
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 BANK
+            ========================================== -->
+
+            <div
+                class="app-page"
+                id="bankPage"
+            >
+
+                <div class="app-header">
+
+                    <button
+                        class="back-button"
+                        id="bankBack"
+                        type="button"
+                    >
+                        ←
+                    </button>
+
+                    <h2>
+                        🏦 ธนาคาร
+                    </h2>
+
+                </div>
+
+
+                <!-- BALANCE -->
+
+                <div class="bank-card">
+
+                    <div class="bank-label">
+                        ยอดเงินคงเหลือ
+                    </div>
+
+                    <div
+                        class="bank-balance"
+                        id="balance"
+                    >
+                        ฿10,000
+                    </div>
+
+                    <div class="account-number">
+                        เลขบัญชี xxx-xxxx
+                    </div>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div
+                    class="payment-box"
+                    id="paymentBox"
+                    style="display:none;"
+                >
+
+                    <div class="payment-title">
+                        รายการชำระเงิน
+                    </div>
+
+                    <div
+                        class="payment-name"
+                        id="paymentName"
+                    >
+                        -
+                    </div>
+
+                    <div
+                        class="payment-price"
+                        id="paymentPrice"
+                    >
+                        ฿0
+                    </div>
+
+
+                    <button
+                        class="pay-button"
+                        id="payButton"
+                        type="button"
+                    >
+                        ยืนยันการชำระเงิน
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 SUCCESS
+            ========================================== -->
+
+            <div
+                class="success"
+                id="successPage"
+            >
+
+                <div class="success-icon">
+                    ✅
+                </div>
+
+                <h2>
+                    ชำระเงินเรียบร้อย
+                </h2>
+
+                <p>
+                    รายการสั่งซื้อของคุณสำเร็จแล้ว
+                </p>
+
+
+                <button
+                    class="home-button"
+                    id="successHome"
+                    type="button"
+                >
+                    กลับหน้าหลัก
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+/*
+   เงินเริ่มต้น
+*/
+
+let balance = 10000;
+
+
+/*
+   รายการที่กำลังจะจ่าย
+*/
+
+let pendingItem = null;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const phone =
+    document.getElementById("phone");
+
+const phoneHome =
+    document.getElementById("phoneHome");
+
+const shopPage =
+    document.getElementById("shopPage");
+
+const bankPage =
+    document.getElementById("bankPage");
+
+const successPage =
+    document.getElementById("successPage");
+
+const balanceText =
+    document.getElementById("balance");
+
+const paymentBox =
+    document.getElementById("paymentBox");
+
+const paymentName =
+    document.getElementById("paymentName");
+
+const paymentPrice =
+    document.getElementById("paymentPrice");
+
+
+/* =====================================================
+   UPDATE BALANCE
+===================================================== */
+
+function updateBalance(){
+
+    balanceText.textContent =
+        "฿" +
+        balance.toLocaleString("th-TH");
+
+}
+
+
+/* =====================================================
+   HIDE ALL PHONE PAGES
+===================================================== */
+
+function hidePages(){
+
+    phoneHome.style.display =
+        "none";
+
+    shopPage.style.display =
+        "none";
+
+    bankPage.style.display =
+        "none";
+
+    successPage.style.display =
+        "none";
+
+}
+
+
+/* =====================================================
+   OPEN PHONE
+===================================================== */
+
+document
+    .getElementById("openPhone")
+    .addEventListener(
+        "click",
+        function(){
+
+            phone.style.display =
+                "block";
+
+            hidePages();
+
+            phoneHome.style.display =
+                "block";
+
+        }
+    );
+
+
+/* =====================================================
+   CLOSE PHONE
+===================================================== */
+
+document
+    .getElementById("closePhone")
+    .addEventListener(
+        "click",
+        function(){
+
+            phone.style.display =
+                "none";
+
+        }
+    );
+
+
+/* =====================================================
+   OPEN SHOP
+===================================================== */
+
+document
+    .getElementById("openShop")
+    .addEventListener(
+        "click",
+        function(){
+
+            hidePages();
+
+            shopPage.style.display =
+                "block";
+
+        }
+    );
+
+
+/* =====================================================
+   OPEN BANK
+===================================================== */
+
+document
+    .getElementById("openBank")
+    .addEventListener(
+        "click",
+        function(){
+
+            hidePages();
+
+            bankPage.style.display =
+                "block";
+
+            updateBalance();
+
+        }
+    );
+
+
+/* =====================================================
+   SHOP → PAYMENT
+===================================================== */
+
+document
+    .querySelectorAll(".buy-button")
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    const name =
+                        button.dataset.name;
+
+                    const price =
+                        Number(
+                            button.dataset.price
+                        );
+
+
+                    /*
+                       จำของที่กำลังซื้อ
+                    */
+
+                    pendingItem = {
+
+                        name:
+                            name,
+
+                        price:
+                            price
+
+                    };
+
+
+                    /*
+                       เปิดธนาคารทันที
+                    */
+
+                    hidePages();
+
+                    bankPage.style.display =
+                        "block";
+
+
+                    /*
+                       แสดงรายการจ่าย
+                    */
+
+                    paymentBox.style.display =
+                        "block";
+
+
+                    paymentName.textContent =
+                        name;
+
+
+                    paymentPrice.textContent =
+                        "฿" +
+                        price.toLocaleString(
+                            "th-TH"
+                        );
+
+
+                    updateBalance();
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   CONFIRM PAYMENT
+===================================================== */
+
+document
+    .getElementById("payButton")
+    .addEventListener(
+        "click",
+        function(){
+
+            if(!pendingItem){
+
+                return;
+
+            }
+
+
+            /*
+               เงินไม่พอ
+            */
+
+            if(
+                balance <
+                pendingItem.price
+            ){
+
+                alert(
+                    "เงินไม่พอ"
+                );
+
+                return;
+
+            }
+
+
+            /*
+               หักเงิน
+            */
+
+            balance -=
+                pendingItem.price;
+
+
+            updateBalance();
+
+
+            /*
+               ล้างรายการ
+            */
+
+            pendingItem = null;
+
+
+            /*
+               แสดงหน้าชำระสำเร็จ
+            */
+
+            paymentBox.style.display =
+                "none";
+
+            hidePages();
+
+            successPage.style.display =
+                "block";
+
+        }
+    );
+
+
+/* =====================================================
+   SHOP BACK
+===================================================== */
+
+document
+    .getElementById("shopBack")
+    .addEventListener(
+        "click",
+        function(){
+
+            hidePages();
+
+            phoneHome.style.display =
+                "block";
+
+        }
+    );
+
+
+/* =====================================================
+   BANK BACK
+===================================================== */
+
+document
+    .getElementById("bankBack")
+    .addEventListener(
+        "click",
+        function(){
+
+            hidePages();
+
+            phoneHome.style.display =
+                "block";
+
+        }
+    );
+
+
+/* =====================================================
+   SUCCESS → HOME
+===================================================== */
+
+document
+    .getElementById("successHome")
+    .addEventListener(
+        "click",
+        function(){
+
+            hidePages();
+
+            phoneHome.style.display =
+                "block";
+
+        }
+    );
+
+
+/* =====================================================
+   START
+===================================================== */
+
+updateBalance();
+
+</script>
+
+
+</body>
+
+</html>
