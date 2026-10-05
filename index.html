@@ -107,9 +107,6 @@ body{
 
 }
 
-
-/* subtle floor lines */
-
 .floor::before{
 
   content:"";
@@ -163,11 +160,8 @@ body{
 ===================================================== */
 
 .object{
-
   position:absolute;
-
   user-select:none;
-
 }
 
 
@@ -184,9 +178,6 @@ body{
   height:20%;
 
 }
-
-
-/* outer bed */
 
 .bed-outer{
 
@@ -221,9 +212,6 @@ body{
 
 }
 
-
-/* inner cushion */
-
 .bed-inner{
 
   position:absolute;
@@ -249,9 +237,6 @@ body{
 
 }
 
-
-/* bed pillow */
-
 .bed-pillow{
 
   position:absolute;
@@ -271,9 +256,6 @@ body{
     rgba(255,255,255,.15);
 
 }
-
-
-/* bed label */
 
 .bed-label{
 
@@ -309,9 +291,6 @@ body{
 
 }
 
-
-/* bowl */
-
 .bowl{
 
   position:absolute;
@@ -344,26 +323,13 @@ body{
 
 }
 
-
-/* left bowl */
-
 .bowl.food{
-
   left:4%;
-
 }
-
-
-/* right bowl */
 
 .bowl.water{
-
   right:4%;
-
 }
-
-
-/* inside */
 
 .bowl::before{
 
@@ -386,9 +352,6 @@ body{
     #303030;
 
 }
-
-
-/* food */
 
 .bowl.food::after{
 
@@ -413,9 +376,6 @@ body{
 
 }
 
-
-/* water */
-
 .bowl.water::after{
 
   content:"";
@@ -430,17 +390,13 @@ body{
 
   border-radius:50%;
 
-  background:
-    #8d9aa0;
+  background:#8d9aa0;
 
   box-shadow:
     inset 0 2px 3px
     rgba(255,255,255,.25);
 
 }
-
-
-/* labels */
 
 .bowl-label{
 
@@ -476,7 +432,6 @@ body{
 .cat-toy{
 
   left:50%;
-
   top:42%;
 
   width:32%;
@@ -486,9 +441,6 @@ body{
     translateX(-50%);
 
 }
-
-
-/* toy base */
 
 .toy-base{
 
@@ -519,19 +471,14 @@ body{
 
 }
 
-
-/* toy pole */
-
 .toy-pole{
 
   position:absolute;
 
   left:48%;
-
   bottom:10%;
 
   width:4%;
-
   height:68%;
 
   background:
@@ -546,15 +493,11 @@ body{
 
 }
 
-
-/* toy arm */
-
 .toy-arm{
 
   position:absolute;
 
   left:49%;
-
   top:18%;
 
   width:45%;
@@ -571,15 +514,11 @@ body{
 
 }
 
-
-/* colorful toy ball */
-
 .toy-ball{
 
   position:absolute;
 
   right:0;
-
   top:0;
 
   width:28px;
@@ -601,15 +540,11 @@ body{
 
 }
 
-
-/* little feather */
-
 .toy-feather{
 
   position:absolute;
 
   left:48%;
-
   top:6%;
 
   width:16px;
@@ -633,16 +568,12 @@ body{
 
 }
 
-
-/* toy label */
-
 .toy-label{
 
   position:absolute;
 
   left:0;
   right:0;
-
   bottom:-15%;
 
   text-align:center;
@@ -657,7 +588,92 @@ body{
 
 
 /* =====================================================
-   DEBUG / DESIGN GRID
+   CAT
+===================================================== */
+
+.cat{
+
+  position:absolute;
+
+  left:50%;
+  bottom:24%;
+
+  width:42%;
+
+  transform:
+    translateX(-50%);
+
+  z-index:10;
+
+  pointer-events:none;
+
+  user-select:none;
+
+  transition:
+    left 2.4s ease-in-out;
+
+}
+
+
+/*
+   รูป PNG ของแมว
+   ภาพ A4 จะถูกย่อให้พอดีกับพื้นที่นี้
+*/
+
+.cat img{
+
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  max-height:30vh;
+
+  object-fit:contain;
+
+  object-position:center bottom;
+
+  pointer-events:none;
+
+  user-select:none;
+
+  -webkit-user-drag:none;
+
+}
+
+
+/* =====================================================
+   CAT SHADOW
+===================================================== */
+
+.cat-shadow{
+
+  position:absolute;
+
+  left:50%;
+  bottom:-2px;
+
+  width:48%;
+  height:10px;
+
+  transform:
+    translateX(-50%);
+
+  border-radius:50%;
+
+  background:
+    rgba(0,0,0,.3);
+
+  filter:
+    blur(4px);
+
+  z-index:-1;
+
+}
+
+
+/* =====================================================
+   DEBUG
 ===================================================== */
 
 .design-info{
@@ -682,12 +698,23 @@ body{
 
   opacity:.7;
 
+  z-index:30;
+
 }
 
 
 /* =====================================================
-   RESPONSIVE
+   REDUCED MOTION
 ===================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+  *{
+    animation:none !important;
+    transition:none !important;
+  }
+
+}
 
 @media (max-width:430px){
 
@@ -704,25 +731,13 @@ body{
 <body>
 
 
-<!-- =====================================================
-     GAME
-===================================================== -->
-
 <main class="game">
-
 
   <div class="wall"></div>
 
   <div class="floor"></div>
 
   <div class="light"></div>
-
-
-  <!-- small development indicator -->
-
-  <div class="design-info">
-    CAT ROOM • PROTOTYPE
-  </div>
 
 
   <!-- ===================================================
@@ -766,7 +781,7 @@ body{
 
 
   <!-- ===================================================
-       STANDING CAT TOY
+       CAT TOY
   ==================================================== -->
 
   <div class="object cat-toy">
@@ -788,7 +803,405 @@ body{
   </div>
 
 
+  <!-- ===================================================
+       CAT
+  ==================================================== -->
+
+  <div
+    id="cat"
+    class="cat"
+    aria-label="Black cat"
+  >
+
+    <div class="cat-shadow"></div>
+
+    <img
+      id="catImage"
+      src="Sit.png"
+      alt="Black cat"
+      draggable="false"
+    >
+
+  </div>
+
+
+  <div class="design-info">
+    CAT ROOM • PROTOTYPE
+  </div>
+
+
 </main>
+
+
+<script>
+
+/* =====================================================
+   CAT SYSTEM
+===================================================== */
+
+const cat =
+  document.getElementById("cat");
+
+const catImage =
+  document.getElementById("catImage");
+
+
+/*
+   ไฟล์แมว
+*/
+
+const CAT_IMAGES = {
+
+  Sit:
+    "Sit.png",
+
+  Bored:
+    "Bored.png",
+
+  Run_left:
+    "Run_left.png",
+
+  Run_right:
+    "Run_right.png",
+
+  Sleep:
+    "Sleep.png",
+
+  Wet:
+    "Wet.png",
+
+  Yawn:
+    "Yawn.png"
+
+};
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let catBusy = false;
+
+
+/*
+   ตำแหน่งของแมว
+   เป็นเปอร์เซ็นต์ของความกว้างเกม
+*/
+
+let catPosition = 50;
+
+
+/* =====================================================
+   CHANGE CAT
+===================================================== */
+
+function setCat(type){
+
+  if(!CAT_IMAGES[type]){
+    return;
+  }
+
+  catImage.src =
+    CAT_IMAGES[type];
+
+}
+
+
+/* =====================================================
+   RETURN TO SIT
+===================================================== */
+
+function sit(){
+
+  setCat("Sit");
+
+}
+
+
+/* =====================================================
+   WAIT
+===================================================== */
+
+function wait(ms){
+
+  return new Promise(
+    resolve =>
+      setTimeout(resolve, ms)
+  );
+
+}
+
+
+/* =====================================================
+   YAWN
+   ทุก 1 นาทีของเวลาจริง
+===================================================== */
+
+async function doYawn(){
+
+  if(catBusy){
+    return;
+  }
+
+  catBusy = true;
+
+  setCat("Yawn");
+
+  /*
+     แสดงท่าหาวประมาณ 3 วินาที
+  */
+
+  await wait(3000);
+
+  sit();
+
+  catBusy = false;
+
+}
+
+
+/* =====================================================
+   BORED
+   ทุก 5 นาทีของเวลาจริง
+===================================================== */
+
+async function doBored(){
+
+  if(catBusy){
+    return;
+  }
+
+  catBusy = true;
+
+  setCat("Bored");
+
+  /*
+     แสดงท่าเบื่อประมาณ 4 วินาที
+  */
+
+  await wait(4000);
+
+  sit();
+
+  catBusy = false;
+
+}
+
+
+/* =====================================================
+   WALK
+===================================================== */
+
+async function walk(direction){
+
+  if(catBusy){
+    return;
+  }
+
+  catBusy = true;
+
+
+  /*
+     กำหนดระยะทาง
+  */
+
+  const distance =
+    20 + Math.random() * 25;
+
+
+  if(direction === "left"){
+
+    /*
+       ไม่ให้เดินชนขอบซ้าย
+    */
+
+    catPosition =
+      Math.max(
+        12,
+        catPosition - distance
+      );
+
+    setCat("Run_left");
+
+  }
+  else{
+
+    /*
+       ไม่ให้เดินชนขอบขวา
+    */
+
+    catPosition =
+      Math.min(
+        88,
+        catPosition + distance
+      );
+
+    setCat("Run_right");
+
+  }
+
+
+  /*
+     ให้แมวเคลื่อนที่จริง
+  */
+
+  cat.style.left =
+    catPosition + "%";
+
+
+  /*
+     เวลาเดิน
+  */
+
+  await wait(2400);
+
+
+  /*
+     กลับมานั่ง
+  */
+
+  sit();
+
+  catBusy = false;
+
+}
+
+
+/* =====================================================
+   RANDOM WALK
+===================================================== */
+
+async function randomWalk(){
+
+  if(catBusy){
+    return;
+  }
+
+
+  /*
+     ถ้าอยู่ซ้ายมาก ให้เดินขวา
+     ถ้าอยู่ขวามาก ให้เดินซ้าย
+     ไม่อย่างนั้นสุ่ม
+  */
+
+  let direction;
+
+
+  if(catPosition <= 25){
+
+    direction = "right";
+
+  }
+  else if(catPosition >= 75){
+
+    direction = "left";
+
+  }
+  else{
+
+    direction =
+      Math.random() < .5
+        ? "left"
+        : "right";
+
+  }
+
+
+  await walk(direction);
+
+}
+
+
+/* =====================================================
+   AUTOMATIC WALK TIMER
+===================================================== */
+
+
+/*
+   แมวจะเริ่มเดินหลังจากเกมเปิดประมาณ 8 วินาที
+   จากนั้นเดินเป็นระยะ ๆ
+*/
+
+function scheduleWalk(){
+
+  const delay =
+    8000 +
+    Math.random() * 7000;
+
+
+  setTimeout(
+    async () => {
+
+      await randomWalk();
+
+      scheduleWalk();
+
+    },
+    delay
+  );
+
+}
+
+
+/* =====================================================
+   REAL TIME YAWN
+===================================================== */
+
+
+/*
+   1 นาทีจริง
+*/
+
+setInterval(
+  doYawn,
+  60 * 1000
+);
+
+
+/* =====================================================
+   REAL TIME BORED
+===================================================== */
+
+
+/*
+   5 นาทีจริง
+*/
+
+setInterval(
+  doBored,
+  5 * 60 * 1000
+);
+
+
+/* =====================================================
+   START
+===================================================== */
+
+setCat("Sit");
+
+cat.style.left =
+  catPosition + "%";
+
+
+scheduleWalk();
+
+
+/* =====================================================
+   PRELOAD CAT IMAGES
+===================================================== */
+
+Object.values(CAT_IMAGES).forEach(
+  src => {
+
+    const image =
+      new Image();
+
+    image.src = src;
+
+  }
+);
+
+</script>
 
 
 </body>
