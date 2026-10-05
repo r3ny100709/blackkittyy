@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shop</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    min-height:100%;
+
+    background:#777;
+
+    font-family:Arial,sans-serif;
+}
+
+button{
+    font:inherit;
+}
+
+.shop{
+    width:min(500px,94vw);
+
+    margin:30px auto;
+
+    padding:24px;
+
+    background:#111;
+
+    color:white;
+
+    border-radius:30px;
+
+    box-shadow:0 15px 50px rgba(0,0,0,.4);
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    margin-bottom:25px;
+}
+
+.back{
+    width:44px;
+    height:44px;
+
+    border:0;
+    border-radius:14px;
+
+    background:#292929;
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+h1{
+    margin:0;
+    font-size:25px;
+}
+
+.item{
+    padding:20px;
+
+    margin-bottom:15px;
+
+    border-radius:22px;
+
+    background:#202020;
+
+    border:1px solid #383838;
+}
+
+.item-name{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.item-price{
+    margin-top:6px;
+    color:#aaa;
+    font-size:15px;
+}
+
+.buy{
+    width:100%;
+
+    min-height:48px;
+
+    margin-top:15px;
+
+    border:0;
+    border-radius:15px;
+
+    background:white;
+    color:#111;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<main class="shop">
+
+    <div class="header">
+
+        <button
+            class="back"
+            id="back"
+            type="button"
+        >
+            ←
+        </button>
+
+        <h1>
+            🛒 ร้านค้า
+        </h1>
+
+    </div>
+
+
+    <!-- FOOD -->
+
+    <div class="item">
+
+        <div class="item-name">
+            อาหารแมวทั่วไป
+        </div>
+
+        <div class="item-price">
+            ฿150
+        </div>
+
+        <button
+            class="buy"
+            data-name="อาหารแมวทั่วไป"
+            data-price="150"
+            type="button"
+        >
+            สั่งซื้อ
+        </button>
+
+    </div>
+
+
+    <!-- FISH -->
+
+    <div class="item">
+
+        <div class="item-name">
+            อาหารแมวรสปลา
+        </div>
+
+        <div class="item-price">
+            ฿220
+        </div>
+
+        <button
+            class="buy"
+            data-name="อาหารแมวรสปลา"
+            data-price="220"
+            type="button"
+        >
+            สั่งซื้อ
+        </button>
+
+    </div>
+
+
+    <!-- WET FOOD -->
+
+    <div class="item">
+
+        <div class="item-name">
+            อาหารเปียก
+        </div>
+
+        <div class="item-price">
+            ฿75
+        </div>
+
+        <button
+            class="buy"
+            data-name="อาหารเปียก"
+            data-price="75"
+            type="button"
+        >
+            สั่งซื้อ
+        </button>
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* =========================
+   BACK
+========================= */
+
+document
+    .getElementById("back")
+    .addEventListener("click",function(){
+
+        window.location.href = "phone.html";
+
+    });
+
+
+/* =========================
+   BUY
+========================= */
+
+document
+    .querySelectorAll(".buy")
+    .forEach(function(button){
+
+        button.addEventListener("click",function(){
+
+            const name =
+                button.dataset.name;
+
+            const price =
+                Number(button.dataset.price);
+
+
+            /*
+               เก็บรายการที่กำลังซื้อ
+            */
+
+            localStorage.setItem(
+                "pendingItem",
+                JSON.stringify({
+
+                    name:name,
+                    price:price
+
+                })
+            );
+
+
+            /*
+               ไปธนาคาร
+            */
+
+            window.location.href =
+                "bank.html";
+
+        });
+
+    });
+
+</script>
+
+</body>
+</html>
