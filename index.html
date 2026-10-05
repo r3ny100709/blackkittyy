@@ -1,1 +1,795 @@
-# blackkittyy
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Cat Game</title>
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+  margin:0;
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  background:#171717;
+  color:#fff;
+  font-family:
+    Arial,
+    "Noto Sans Thai",
+    sans-serif;
+
+  overflow:hidden;
+}
+
+
+/* =====================================================
+   GAME SCREEN — 9:16
+===================================================== */
+
+.game{
+
+  position:relative;
+
+  width:min(100vw, 56.25vh);
+  height:min(100vh, 177.7778vw);
+
+  margin:auto;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #8b8b8b 0%,
+      #777777 68%,
+      #686868 68%,
+      #5e5e5e 100%
+    );
+
+}
+
+
+/* =====================================================
+   WALL
+===================================================== */
+
+.wall{
+
+  position:absolute;
+
+  inset:0 0 32% 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #969696,
+      #858585
+    );
+
+}
+
+
+/* =====================================================
+   FLOOR
+===================================================== */
+
+.floor{
+
+  position:absolute;
+
+  left:0;
+  right:0;
+  bottom:0;
+
+  height:32%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #696969,
+      #555555
+    );
+
+}
+
+
+/* subtle floor lines */
+
+.floor::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:.12;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 38px,
+      #ffffff 39px,
+      transparent 40px
+    );
+
+}
+
+
+/* =====================================================
+   ROOM LIGHT
+===================================================== */
+
+.light{
+
+  position:absolute;
+
+  width:90%;
+  height:45%;
+
+  top:-15%;
+  left:5%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,255,255,.16),
+      transparent 70%
+    );
+
+  pointer-events:none;
+
+}
+
+
+/* =====================================================
+   PRODUCT BASE
+===================================================== */
+
+.object{
+
+  position:absolute;
+
+  user-select:none;
+
+}
+
+
+/* =====================================================
+   1. CAT BED
+===================================================== */
+
+.cat-bed{
+
+  left:7%;
+  bottom:10%;
+
+  width:45%;
+  height:20%;
+
+}
+
+
+/* outer bed */
+
+.bed-outer{
+
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  width:100%;
+  height:72%;
+
+  border-radius:
+    48%
+    48%
+    28%
+    28%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #bcbcbc,
+      #888888
+    );
+
+  border:
+    2px solid
+    #666;
+
+  box-shadow:
+    0 10px 18px
+    rgba(0,0,0,.28);
+
+}
+
+
+/* inner cushion */
+
+.bed-inner{
+
+  position:absolute;
+
+  left:9%;
+  bottom:17%;
+
+  width:82%;
+  height:53%;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      #9c9c9c,
+      #737373
+    );
+
+  border:
+    2px solid
+    #666;
+
+}
+
+
+/* bed pillow */
+
+.bed-pillow{
+
+  position:absolute;
+
+  left:28%;
+  bottom:29%;
+
+  width:44%;
+  height:28%;
+
+  border-radius:50%;
+
+  background:#aaa;
+
+  box-shadow:
+    inset 0 4px 8px
+    rgba(255,255,255,.15);
+
+}
+
+
+/* bed label */
+
+.bed-label{
+
+  position:absolute;
+
+  left:0;
+  bottom:-18%;
+
+  width:100%;
+
+  text-align:center;
+
+  color:#ddd;
+
+  font-size:11px;
+
+  letter-spacing:1px;
+
+}
+
+
+/* =====================================================
+   2. FOOD + WATER BOWLS
+===================================================== */
+
+.bowls{
+
+  right:7%;
+  bottom:10%;
+
+  width:40%;
+  height:17%;
+
+}
+
+
+/* bowl */
+
+.bowl{
+
+  position:absolute;
+
+  bottom:0;
+
+  width:42%;
+  height:54%;
+
+  border-radius:
+    12%
+    12%
+    45%
+    45%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #bdbdbd,
+      #777777
+    );
+
+  border:
+    2px solid
+    #5a5a5a;
+
+  box-shadow:
+    0 8px 10px
+    rgba(0,0,0,.25);
+
+}
+
+
+/* left bowl */
+
+.bowl.food{
+
+  left:4%;
+
+}
+
+
+/* right bowl */
+
+.bowl.water{
+
+  right:4%;
+
+}
+
+
+/* inside */
+
+.bowl::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:10%;
+  right:10%;
+  top:10%;
+
+  height:42%;
+
+  border-radius:50%;
+
+  background:#424242;
+
+  border:
+    1px solid
+    #303030;
+
+}
+
+
+/* food */
+
+.bowl.food::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:18%;
+  right:18%;
+  top:18%;
+
+  height:25%;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #4c4c4c 0 25%,
+      transparent 27%
+    );
+
+}
+
+
+/* water */
+
+.bowl.water::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:17%;
+  right:17%;
+  top:20%;
+
+  height:18%;
+
+  border-radius:50%;
+
+  background:
+    #8d9aa0;
+
+  box-shadow:
+    inset 0 2px 3px
+    rgba(255,255,255,.25);
+
+}
+
+
+/* labels */
+
+.bowl-label{
+
+  position:absolute;
+
+  bottom:-30%;
+
+  width:42%;
+
+  text-align:center;
+
+  color:#ddd;
+
+  font-size:9px;
+
+  letter-spacing:.5px;
+
+}
+
+.food-label{
+  left:4%;
+}
+
+.water-label{
+  right:4%;
+}
+
+
+/* =====================================================
+   3. STANDING CAT TOY
+===================================================== */
+
+.cat-toy{
+
+  left:50%;
+
+  top:42%;
+
+  width:32%;
+  height:32%;
+
+  transform:
+    translateX(-50%);
+
+}
+
+
+/* toy base */
+
+.toy-base{
+
+  position:absolute;
+
+  left:16%;
+  bottom:0;
+
+  width:68%;
+  height:13%;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #c4c4c4,
+      #777
+    );
+
+  border:
+    2px solid
+    #555;
+
+  box-shadow:
+    0 8px 12px
+    rgba(0,0,0,.25);
+
+}
+
+
+/* toy pole */
+
+.toy-pole{
+
+  position:absolute;
+
+  left:48%;
+
+  bottom:10%;
+
+  width:4%;
+
+  height:68%;
+
+  background:
+    linear-gradient(
+      to right,
+      #444,
+      #999,
+      #444
+    );
+
+  border-radius:10px;
+
+}
+
+
+/* toy arm */
+
+.toy-arm{
+
+  position:absolute;
+
+  left:49%;
+
+  top:18%;
+
+  width:45%;
+  height:4%;
+
+  background:#555;
+
+  border-radius:10px;
+
+  transform:
+    rotate(-25deg);
+
+  transform-origin:left center;
+
+}
+
+
+/* colorful toy ball */
+
+.toy-ball{
+
+  position:absolute;
+
+  right:0;
+
+  top:0;
+
+  width:28px;
+  height:28px;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff5c7a,
+      #ffd34d 45%,
+      #55d6c2
+    );
+
+  box-shadow:
+    0 0 8px
+    rgba(255,255,255,.3);
+
+}
+
+
+/* little feather */
+
+.toy-feather{
+
+  position:absolute;
+
+  left:48%;
+
+  top:6%;
+
+  width:16px;
+  height:28px;
+
+  border-radius:
+    70%
+    20%
+    70%
+    20%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff5c7a,
+      #9d75ff
+    );
+
+  transform:
+    rotate(18deg);
+
+}
+
+
+/* toy label */
+
+.toy-label{
+
+  position:absolute;
+
+  left:0;
+  right:0;
+
+  bottom:-15%;
+
+  text-align:center;
+
+  color:#ddd;
+
+  font-size:10px;
+
+  letter-spacing:.5px;
+
+}
+
+
+/* =====================================================
+   DEBUG / DESIGN GRID
+===================================================== */
+
+.design-info{
+
+  position:absolute;
+
+  top:14px;
+  left:14px;
+
+  padding:5px 9px;
+
+  border-radius:8px;
+
+  background:
+    rgba(0,0,0,.28);
+
+  color:#ddd;
+
+  font-size:9px;
+
+  letter-spacing:.5px;
+
+  opacity:.7;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width:430px){
+
+  .design-info{
+    display:none;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     GAME
+===================================================== -->
+
+<main class="game">
+
+
+  <div class="wall"></div>
+
+  <div class="floor"></div>
+
+  <div class="light"></div>
+
+
+  <!-- small development indicator -->
+
+  <div class="design-info">
+    CAT ROOM • PROTOTYPE
+  </div>
+
+
+  <!-- ===================================================
+       CAT BED
+  ==================================================== -->
+
+  <div class="object cat-bed">
+
+    <div class="bed-outer"></div>
+
+    <div class="bed-inner"></div>
+
+    <div class="bed-pillow"></div>
+
+    <div class="bed-label">
+      CAT BED
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       FOOD / WATER
+  ==================================================== -->
+
+  <div class="object bowls">
+
+    <div class="bowl food"></div>
+
+    <div class="bowl water"></div>
+
+    <div class="bowl-label food-label">
+      FOOD
+    </div>
+
+    <div class="bowl-label water-label">
+      WATER
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================
+       STANDING CAT TOY
+  ==================================================== -->
+
+  <div class="object cat-toy">
+
+    <div class="toy-base"></div>
+
+    <div class="toy-pole"></div>
+
+    <div class="toy-arm"></div>
+
+    <div class="toy-ball"></div>
+
+    <div class="toy-feather"></div>
+
+    <div class="toy-label">
+      CAT TOY
+    </div>
+
+  </div>
+
+
+</main>
+
+
+</body>
+</html>
