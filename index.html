@@ -1,51 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Cat Game</title>
+
+
+<style>
+
 /* =====================================================
-   CAT SYSTEM
-   ระบบแมวอย่างเดียว
+   BASIC
 ===================================================== */
 
-const catImage = document.getElementById("catImage");
+*{
+    box-sizing:border-box;
+}
+
+
+html,
+body{
+
+    margin:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#777;
+
+}
+
+
+body{
+
+    font-family:
+        Arial,
+        sans-serif;
+
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.game{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+}
+
+
+/* =====================================================
+   CAT
+===================================================== */
+
+#catImage{
+
+    position:absolute;
+
+    left:50%;
+    top:55%;
+
+    width:180px;
+
+    height:auto;
+
+    transform:
+        translate(-50%, -50%);
+
+    object-fit:contain;
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    -webkit-user-drag:none;
+
+    pointer-events:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     GAME
+===================================================== -->
+
+<main class="game">
+
+    <img
+        id="catImage"
+        src="Sit"
+        alt="แมว"
+    >
+
+</main>
+
+
+<script>
+
+/*
+=====================================================
+# ระบบแมว
+=====================================================
+
+Sit        = ปกติ
+Yawn       = หาว
+Bored      = เบื่อ
+Run_left   = เดินซ้าย
+Run_right  = เดินขวา
+Sleep      = นอน
+Wet        = เปียก
+
+=====================================================
+*/
+
+
+const catImage =
+    document.getElementById("catImage");
 
 
 /* =====================================================
    CAT STATE
 ===================================================== */
 
-/*
-   ท่าปัจจุบันของแมว
-
-   Sit        = นั่ง / ปกติ
-   Yawn       = หาว
-   Bored      = เบื่อ
-   Run_left   = เดิน/วิ่งไปทางซ้าย
-   Run_right  = เดิน/วิ่งไปทางขวา
-   Sleep      = นอน
-   Wet        = เปียก / อาบน้ำ
-*/
-
 let catState = "Sit";
 
-
-/*
-   ตำแหน่งแมว
-   ใช้เป็นเปอร์เซ็นต์ของหน้าจอ
-*/
-
 let catX = 50;
+
 let catY = 55;
-
-
-/*
-   ทิศทางการเดิน
-
-   1  = ขวา
-   -1 = ซ้าย
-*/
 
 let direction = 1;
 
 
 /* =====================================================
-   SET CAT POSE
+   เปลี่ยนท่าแมว
 ===================================================== */
 
 function setCatPose(pose){
@@ -58,47 +167,69 @@ function setCatPose(pose){
 
 
 /* =====================================================
-   CAT MOVEMENT
+   อัปเดตตำแหน่ง
+===================================================== */
+
+function updateCatPosition(){
+
+    catImage.style.left =
+        catX + "%";
+
+    catImage.style.top =
+        catY + "%";
+
+}
+
+
+/* =====================================================
+   เดิน
 ===================================================== */
 
 function moveCat(){
 
+
     /*
-       ถ้าแมวกำลังนอน
-       ห้ามเดิน
+       ถ้านอนอยู่
+       ไม่เดิน
     */
 
     if(catState === "Sleep"){
+
         return;
+
     }
 
 
     /*
-       ถ้าแมวเปียก
-       ห้ามเดิน
+       ถ้าเปียกอยู่
+       ไม่เดิน
     */
 
     if(catState === "Wet"){
+
         return;
+
     }
 
 
     /*
-       ถ้าแมวกำลังเดินอยู่
-       ไม่ต้องเริ่มเดินซ้ำ
+       ถ้ากำลังเดินอยู่
+       ไม่เริ่มซ้ำ
     */
 
     if(
         catState === "Run_left" ||
         catState === "Run_right"
     ){
+
         return;
+
     }
 
 
-    /*
-       สุ่มว่าจะเดินไปทางไหน
-    */
+    /* -----------------------------------------------
+       สุ่มทิศทาง
+    ------------------------------------------------ */
 
     direction =
         Math.random() < 0.5
@@ -106,148 +237,177 @@ function moveCat(){
         : 1;
 
 
-    /*
-       เปลี่ยนท่าแมว
-    */
-
     if(direction === -1){
 
         setCatPose("Run_left");
 
-    }else{
+    }
+    else{
 
         setCatPose("Run_right");
 
     }
 
 
-    /*
-       สุ่มระยะทางที่จะเดิน
-    */
+    /* -----------------------------------------------
+       สุ่มระยะทาง
+    ------------------------------------------------ */
 
     const distance =
-        8 + Math.random() * 18;
+        8 +
+        Math.random() * 18;
 
 
-    const startX = catX;
+    const startX =
+        catX;
 
 
     let targetX =
-        catX + (distance * direction);
+        catX +
+        distance * direction;
 
 
     /*
-       จำกัดไม่ให้แมวเดินออกนอกจอ
+       ไม่ให้แมวออกนอกพื้นที่
     */
 
     targetX =
         Math.max(
             10,
-            Math.min(90, targetX)
+            Math.min(
+                90,
+                targetX
+            )
         );
 
 
-    /*
-       เวลาที่ใช้เดิน
-    */
+    /* -----------------------------------------------
+       ความเร็วเดิน
+    ------------------------------------------------ */
 
     const duration =
-        1200 + Math.random() * 1000;
+        1200 +
+        Math.random() * 1000;
 
 
     const startTime =
         performance.now();
 
 
-    function walk(time){
+    /* -----------------------------------------------
+       Animation
+    ------------------------------------------------ */
+
+    function walk(currentTime){
+
 
         const progress =
             Math.min(
-                (time - startTime) / duration,
+                (
+                    currentTime -
+                    startTime
+                ) / duration,
                 1
             );
 
 
         /*
-           ทำให้การเดินนุ่มขึ้น
+           ทำให้เดินนุ่มขึ้น
         */
 
         const ease =
             progress < 0.5
-            ? 2 * progress * progress
-            : 1 - Math.pow(
-                -2 * progress + 2,
-                2
+
+            ? 2 *
+              progress *
+              progress
+
+            : 1 -
+              Math.pow(
+                  -2 * progress + 2,
+                  2
               ) / 2;
 
 
         catX =
             startX +
-            (targetX - startX) * ease;
+            (
+                targetX -
+                startX
+            ) *
+            ease;
+
+
+        updateCatPosition();
 
 
         /*
-           เปลี่ยนตำแหน่งแมว
+           ยังเดินไม่เสร็จ
         */
 
-        catImage.style.left =
-            catX + "%";
+        if(progress < 1){
 
+            requestAnimationFrame(
+                walk
+            );
 
-        /*
-           เดินเสร็จแล้ว
-        */
-
-        if(progress >= 1){
-
-            catX = targetX;
-
-            catImage.style.left =
-                catX + "%";
-
-
-            /*
-               กลับมานั่งตามปกติ
-            */
-
-            setCatPose("Sit");
-
-            return;
         }
 
 
-        requestAnimationFrame(walk);
+        /*
+           เดินเสร็จ
+        */
+
+        else{
+
+            catX =
+                targetX;
+
+            updateCatPosition();
+
+            setCatPose("Sit");
+
+        }
 
     }
 
 
-    requestAnimationFrame(walk);
+    requestAnimationFrame(
+        walk
+    );
 
 }
 
 
 /* =====================================================
-   AUTOMATIC WALK
+   AUTO WALK
 ===================================================== */
 
 /*
-   แมวจะสุ่มเดินประมาณทุก 7–16 วินาที
+   แมวจะสุ่มเดินทุก 7–16 วินาที
 */
 
 function scheduleNextWalk(){
+
 
     const delay =
         7000 +
         Math.random() * 9000;
 
 
-    setTimeout(() => {
+    setTimeout(
 
-        moveCat();
+        function(){
 
-        scheduleNextWalk();
+            moveCat();
 
-    }, delay);
+            scheduleNextWalk();
+
+        },
+
+        delay
+
+    );
 
 }
 
@@ -257,46 +417,69 @@ function scheduleNextWalk(){
 ===================================================== */
 
 /*
-   ทุก 1 นาทีแมวจะหาว
-   แล้วกลับมานั่ง
+   ทุก 1 นาที
+
+   Sit
+     ↓
+   Yawn
+     ↓
+   2 วินาที
+     ↓
+   Sit
 */
 
-setInterval(() => {
+setInterval(
 
-    /*
-       ไม่ขัดจังหวะตอนนอน
-       ไม่ขัดจังหวะตอนเปียก
-       ไม่ขัดจังหวะตอนเดิน
-    */
-
-    if(
-        catState === "Sleep" ||
-        catState === "Wet" ||
-        catState === "Run_left" ||
-        catState === "Run_right"
-    ){
-        return;
-    }
+    function(){
 
 
-    setCatPose("Yawn");
+        /*
+           ถ้ากำลังทำอย่างอื่นอยู่
+           ไม่ขัดจังหวะ
+        */
 
+        if(
+            catState === "Sleep" ||
+            catState === "Wet" ||
+            catState === "Run_left" ||
+            catState === "Run_right"
+        ){
 
-    /*
-       หาวประมาณ 2 วินาที
-    */
-
-    setTimeout(() => {
-
-        if(catState === "Yawn"){
-
-            setCatPose("Sit");
+            return;
 
         }
 
-    }, 2000);
 
-}, 60000);
+        setCatPose("Yawn");
+
+
+        /*
+           หาว 2 วินาที
+        */
+
+        setTimeout(
+
+            function(){
+
+                if(
+                    catState === "Yawn"
+                ){
+
+                    setCatPose("Sit");
+
+                }
+
+            },
+
+            2000
+
+        );
+
+    },
+
+    60000
+
+);
 
 
 /* =====================================================
@@ -304,71 +487,84 @@ setInterval(() => {
 ===================================================== */
 
 /*
-   ทุก 5 นาทีแมวจะแสดงท่า Bored
-   แล้วกลับมานั่ง
+   ทุก 5 นาที
+
+   Sit
+     ↓
+   Bored
+     ↓
+   3 วินาที
+     ↓
+   Sit
 */
 
-setInterval(() => {
+setInterval(
 
-    /*
-       ไม่ขัดจังหวะท่าอื่น
-    */
-
-    if(
-        catState === "Sleep" ||
-        catState === "Wet" ||
-        catState === "Run_left" ||
-        catState === "Run_right"
-    ){
-        return;
-    }
+    function(){
 
 
-    setCatPose("Bored");
+        /*
+           ไม่ขัดจังหวะ
+           ตอนนอน / เปียก / เดิน
+        */
 
+        if(
+            catState === "Sleep" ||
+            catState === "Wet" ||
+            catState === "Run_left" ||
+            catState === "Run_right"
+        ){
 
-    /*
-       เบื่อประมาณ 3 วินาที
-    */
-
-    setTimeout(() => {
-
-        if(catState === "Bored"){
-
-            setCatPose("Sit");
+            return;
 
         }
 
-    }, 3000);
 
-}, 300000);
+        setCatPose("Bored");
+
+
+        /*
+           เบื่อ 3 วินาที
+        */
+
+        setTimeout(
+
+            function(){
+
+                if(
+                    catState === "Bored"
+                ){
+
+                    setCatPose("Sit");
+
+                }
+
+            },
+
+            3000
+
+        );
+
+    },
+
+    300000
+
+);
 
 
 /* =====================================================
    START
 ===================================================== */
 
-/*
-   เริ่มต้นด้วยท่านั่ง
-*/
-
 setCatPose("Sit");
 
-
-/*
-   ตั้งตำแหน่งเริ่มต้น
-*/
-
-catImage.style.left =
-    catX + "%";
-
-
-catImage.style.top =
-    catY + "%";
-
-
-/*
-   เริ่มระบบเดินอัตโนมัติ
-*/
+updateCatPosition();
 
 scheduleNextWalk();
+
+</script>
+
+
+</body>
+
+</html>
